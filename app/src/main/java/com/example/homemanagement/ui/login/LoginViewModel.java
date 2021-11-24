@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
+import com.example.homemanagement.R;
 import com.example.homemanagement.data.LoginRepository;
 import com.example.homemanagement.data.Result;
 import com.example.homemanagement.data.model.LoggedInUser;
-import com.example.homemanagement.R;
 
 public class LoginViewModel extends ViewModel {
 
