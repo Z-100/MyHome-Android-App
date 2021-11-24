@@ -7,6 +7,9 @@ Follow these steps to get started:
 3. Start programming some (new) methods and/or classes.
 4. Create a pull request & wait :)
 
+**Important note**
+- For authorized users, DO NOT CREATE PULL REQUESTS, WHICH ARE NOT YOUR OWN
+
 Before submitting, make sure you wrote some tests. Javadoc is nice to have.
 
 ## Style Guidelines
