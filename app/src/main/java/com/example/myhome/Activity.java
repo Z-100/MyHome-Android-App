@@ -11,7 +11,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class Activity extends AppCompatActivity {
 
     private TextView mTextViewResult;
     private Button buttonParse;
