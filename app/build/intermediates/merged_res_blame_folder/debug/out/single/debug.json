@@ -8,16 +8,24 @@
         "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
+        "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\font_leckerli_one.xml.flat",
+        "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\font\\leckerli_one.xml"
+    },
+    {
         "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\layout\\activity_register.xml"
     },
     {
         "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
-        "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\layout\\activity_main.xml"
+        "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
         "merged": "C:\\Users\\Andrei\\AndroidStudioProjects\\MyHome\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
