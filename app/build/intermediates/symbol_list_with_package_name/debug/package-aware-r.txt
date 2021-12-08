@@ -57,6 +57,10 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -1833,6 +1837,7 @@ drawable test_custom_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+font leckerli_one
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -1931,6 +1936,8 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id button2
+id button4
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2003,6 +2010,8 @@ id easeIn
 id easeInOut
 id easeOut
 id east
+id editTextTextEmailAddress
+id editTextTextPassword
 id edit_query
 id elastic
 id end
@@ -2258,6 +2267,8 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView2
+id textView3
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -2372,7 +2383,8 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_main
+layout activity_login
+layout activity_register
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
