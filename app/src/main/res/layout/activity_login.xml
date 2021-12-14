@@ -11,13 +11,13 @@
         android:id="@+id/et_title"
         android:layout_width="85dp"
         android:layout_height="52dp"
-        android:layout_marginTop="220dp"
-        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="36dp"
+        android:fontFamily="sans-serif"
         android:text="@string/login"
-        android:textColor="@color/black"
+        android:textColor="@color/writing"
         android:textSize="34sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_log_in"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.441" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_log_in"
@@ -73,5 +73,31 @@
         app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_password" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="365dp" />
+
+    <ScrollView
+        android:layout_width="322dp"
+        android:layout_height="247dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="220dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
