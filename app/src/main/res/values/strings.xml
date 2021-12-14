@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyHome</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="log_in_text">Log in!</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="confirm">Confirm</string>
+    <string name="email">E-Mail</string>
 </resources>
