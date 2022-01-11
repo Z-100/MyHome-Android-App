@@ -7,41 +7,46 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class LoginActivity extends AppCompatActivity {
-    Button btn_logIn;
-    Button btn_signUp;
-    EditText et_username;
-    EditText et_password;
-    EditText et_email;
+    FloatingActionButton btn_signIn;
+    Button btn_signUp, btn_forgotPassword;
+    EditText et_username, et_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        btn_signIn   = findViewById(R.id.btn_log_in_login);
+        btn_signUp = findViewById(R.id.btn_sign_up_login);
+        btn_forgotPassword = findViewById(R.id.btn_forgot_password_login);
+        et_username = findViewById(R.id.et_username_login);
+        et_password = findViewById(R.id.et_password_login);
 
-        btn_logIn       =    findViewById(R.id.btn_log_in);
-        btn_signUp      =    findViewById(R.id.btn_sign_up);
-        et_username     =    findViewById(R.id.et_register_username);
-        et_password     =    findViewById(R.id.et_register_password);
-        et_email        =    findViewById(R.id.et_register_email);
-
-        btn_signUp.setOnClickListener(view -> {
+        btn_signIn.setOnClickListener(view -> {
             openMembersActivity();
         });
 
-
-        btn_logIn.setOnClickListener(view -> {
-            openLoginActivity();
+        btn_signUp.setOnClickListener(view -> {
+            openRegisterActivity();
         });
+
+        btn_forgotPassword.setOnClickListener(view -> {
+            openResetPasswordActivity();
+        });
+    }
+
+    public void openResetPasswordActivity() {
     }
 
     public void openMembersActivity() {
         Intent intent = new Intent(this, MembersActivity.class);
         startActivity(intent);
     }
-    public void openLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    public void openRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

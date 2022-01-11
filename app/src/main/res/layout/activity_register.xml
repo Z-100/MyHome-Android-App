@@ -8,7 +8,7 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/et_register_title"
+        android:id="@+id/t_register_title"
         android:layout_width="131dp"
         android:layout_height="53dp"
         android:layout_marginTop="48dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login_register" />
 
     <Button
-        android:id="@+id/btn_log_in_register"
+        android:id="@+id/btn_confirm_register"
         android:layout_width="343dp"
         android:layout_height="56dp"
         android:backgroundTint="@color/orange"
@@ -34,11 +34,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_register_email"
+        app:layout_constraintTop_toBottomOf="@+id/et_email_register"
         app:layout_constraintVertical_bias="0.641" />
 
     <EditText
-        android:id="@+id/et_register_password"
+        android:id="@+id/et_password_register"
         android:layout_width="303dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -48,10 +48,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_register_username" />
+        app:layout_constraintTop_toBottomOf="@+id/et_username_register" />
 
     <EditText
-        android:id="@+id/et_register_email"
+        android:id="@+id/et_email_register"
         android:layout_width="303dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
@@ -61,10 +61,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_register_password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password_register" />
 
     <EditText
-        android:id="@+id/et_register_username"
+        android:id="@+id/et_username_register"
         android:layout_width="303dp"
         android:layout_height="48dp"
         android:layout_marginTop="60dp"
@@ -74,13 +74,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_register_title" />
+        app:layout_constraintTop_toBottomOf="@+id/t_register_title" />
 
     <Button
         android:id="@+id/btn_login_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="88dp"
         android:background="@color/black"
         android:shadowColor="#8F8D8D"
         android:text="@string/login"
