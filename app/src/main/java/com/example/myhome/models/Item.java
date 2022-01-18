@@ -1,28 +1,27 @@
-package com.example.myhome;
-
+package com.example.myhome.models;
 import com.google.firebase.database.PropertyName;
-
 import lombok.Data;
 
+
 @Data
-public class Account {
+public class Item {
 
     @PropertyName("id")
-    private Long id;
+    private int id;
     @PropertyName("name")
     private String name;
-    @PropertyName("pw")
-    private String pw;
 
-    public Long getId() {
+
+    public int getId() {
         return id;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
-
-    public String getPw() {
-        return pw;
+    public void setName(String name) {
+        this.name = name;
     }
 }
