@@ -26,9 +26,7 @@ public class LoginActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password_login);
 
         btn_signIn.setOnClickListener(view -> {
-            if (checkCredentials(et_username.getText().toString(), et_password.getText().toString())){
-                openMembersActivity();
-            }
+            openMembersActivity();
         });
 
         btn_signUp.setOnClickListener(view -> {
@@ -38,12 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         btn_forgotPassword.setOnClickListener(view -> {
             openResetPasswordActivity();
         });
-    }
-
-
-
-    public boolean checkCredentials(String username, String password){
-        return true;
     }
 
     public void openResetPasswordActivity() {
