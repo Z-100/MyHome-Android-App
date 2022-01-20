@@ -8,7 +8,7 @@
     android:backgroundTint="#FFFFFF"
     android:elevation="@dimen/cardview_compat_inset_shadow"
     android:scrollbars="horizontal"
-    tools:context=".LoginActivity">
+    tools:context=".activities.account.LoginActivity">
 
 
     <Button

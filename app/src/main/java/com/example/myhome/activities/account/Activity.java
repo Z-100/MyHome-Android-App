@@ -1,6 +1,8 @@
-package com.example.myhome;
+package com.example.myhome.activities.account;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myhome.AccountFromRESTApiService;
 import com.example.myhome.models.Account;
 import android.os.Bundle;
 import android.widget.Button;
