@@ -6,27 +6,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.myhome.models.Member;
-import com.example.myhome.services.LoginService;
+import com.example.myhome.Constants;
+import com.example.myhome.api.AccountService;
 import com.example.myhome.R;
-import com.example.myhome.models.Token;
-import com.example.myhome.services.RequestMembersService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.api.LogDescriptor;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+
 
 public class LoginActivity extends AppCompatActivity {
     FloatingActionButton btn_signIn;
     Button btn_signUp, btn_forgotPassword;
     EditText et_email, et_password;
-    String username, password;
     SharedPreferences sp;
+    AccountService accountService = new AccountService();
+    JSONArray accountNames = new JSONArray();
 
 
     @Override
@@ -39,15 +44,23 @@ public class LoginActivity extends AppCompatActivity {
         btn_forgotPassword =    findViewById(R.id.btn_forgot_password_login);
         et_email           =    findViewById(R.id.et_username_login);
         et_password        =    findViewById(R.id.et_password_login);
+        sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
 
+        //TODO remove this stuff when login works again
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("token", "sananas");
+        editor.commit();
+        //till here
+
+
+        if (!sp.getString("token", "").equals("")){
+            getMembersFromApi();
+        }
 
         btn_signIn.setOnClickListener(view -> {
-            saveToken(getLoginToken(et_email.getText().toString(), et_password.getText().toString()), et_email.getText().toString());
-
-                openMembersActivity();
+            getAndSaveToken(et_email.getText().toString(), et_password.getText().toString());
 
         });
-
         btn_signUp.setOnClickListener(view -> {
             openRegisterActivity();
         });
@@ -57,64 +70,74 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void saveToken(String token, String email){
-        sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token", token);
-        editor.putString("email", email);
-        editor.commit();
-        Toast.makeText(LoginActivity.this, "Information successfully saved", Toast.LENGTH_LONG).show();
-    }
 
-    public String getLoginToken(String email, String password){
-        final String uri = "http://10.10.21.139:8080/getAcc";
+
+    public void getAndSaveToken(String email, String password){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("email", email);
+        editor.putString("password", password);
+        editor.commit();
         try {
-            Token token = new LoginService().execute(uri, email, password).get().getBody();
-            return token.getToken();
-        } catch (InterruptedException | ExecutionException e) {
+            accountService.getLoginToken(getApplicationContext(),email, password, result ->{
+                Log.d(Constants.TAG, "String result for token " +   result.getString("token"));
+                editor.putString("token", result.getString("token"));
+                editor.commit();
+                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                getMembersFromApi();
+            });
+        } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            Toast.makeText(LoginActivity.this, "Failed to log in", Toast.LENGTH_LONG).show();
         }
     }
 
-    public List<Member> getMembers(){
-        List<Member> members = new ArrayList<>();
+    public void getMembersFromApi(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String email = sp.getString("email", "");
         String token = sp.getString("token", "");
-
-
-        final String uri = "http://10.10.21.139:8080/getMembers";
         try {
-            members = new RequestMembersService().execute(uri, email, token).get().getBody();
-        }catch (InterruptedException | ExecutionException e){
+            accountService.getMembers(getApplicationContext(), email, token, result -> {
+                parseMemberNamesAndImages(result);
+                openMembersActivity(toStringArray(accountNames));
+            });
+        }catch (Exception e){
             e.printStackTrace();
-            return null;
+            Toast.makeText(LoginActivity.this, "Failed to get Members", Toast.LENGTH_LONG).show();
         }
-
-        return members;
     }
-
-
-    public List<Member> getMembersAutomatically(){
-        List<Member> members = new ArrayList<>();
-
-
-        return members;
-    }
-
-
 
     public void openResetPasswordActivity() {
 
     }
 
-    public void openMembersActivity() {
+    public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
+        intent.putExtra("Members", members);
         startActivity(intent);
     }
+    public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
+        for (int i = 0; i < members.length(); i++) {
+            JSONObject member = members.getJSONObject(i);
+            this.accountNames.put(member.getString("name"));
+        }
+    }
+
     public void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
+
+    public static String[] toStringArray(JSONArray array) {
+        if(array==null)
+            return null;
+
+        String[] arr=new String[array.length()];
+        for(int i=0; i<arr.length; i++) {
+            arr[i]=array.optString(i);
+        }
+        return arr;
+    }
+
+
+
 }
