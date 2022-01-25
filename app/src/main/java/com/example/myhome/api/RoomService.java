@@ -25,7 +25,7 @@ public class RoomService {
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/room/get-all-rooms",
+                Constants.BASE_URL+ "room/get-all-rooms",
                 data,
                 response -> {
                     try {

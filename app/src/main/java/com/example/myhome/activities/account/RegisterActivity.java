@@ -49,17 +49,17 @@ public class RegisterActivity extends AppCompatActivity {
     public void createAccount(){
         try {
             accountService.register(getApplicationContext(),et_email.getText().toString(), et_password.getText().toString(), et_username.getText().toString(), result -> {
-                sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+                sp = getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putString("email", et_email.getText().toString());
-                editor.putString("token",  result.getString("token"));
+                editor.putString(Constants.EMAIL, et_email.getText().toString());
+                editor.putString(Constants.TOKEN,  result.getString(Constants.TOKEN));
                 editor.commit();
 
                 getMembersFromApi();
             });
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(RegisterActivity.this, "Failed to sign you up", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, Constants.REGISTERERROR, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -70,9 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void getMembersFromApi(){
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-        String email = sp.getString("email", "");
-        String token = sp.getString("token", "");
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
+        String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
+        String token = sp.getString(Constants.TOKEN,Constants.EMPTYSTRING);
         try {
             accountService.getMembers(getApplicationContext(), email, token, result -> {
                 parseMemberNamesAndImages(result);
@@ -80,19 +80,19 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(RegisterActivity.this, "Failed to get Members", Toast.LENGTH_LONG).show();
+            Toast.makeText(RegisterActivity.this, Constants.MEMBERFAILEDERROR, Toast.LENGTH_LONG).show();
         }
     }
 
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
-        intent.putExtra("Members", members);
+        intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
-            this.accountNames.put(member.getString("name"));
+            this.accountNames.put(member.getString(Constants.NAME));
         }
     }
 

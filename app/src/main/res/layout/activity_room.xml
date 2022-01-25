@@ -8,20 +8,22 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/roomdata"
+        android:layout_width="262dp"
+        android:layout_height="78dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="105dp"
         android:text="Room"
-        android:textSize ="30dp"/>
+        android:textAlignment="center"
+        android:textSize="50dp"
+        android:textStyle="bold" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:id="@+id/imageView"
-        android:src="@drawable/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/roomdata"
         android:layout_centerHorizontal="true"
-        android:layout_below= "@+id/roomdata"
-        android:layout_marginTop="27dp"/>
+        android:layout_marginTop="27dp"
+        android:src="@drawable/arrow" />
 </RelativeLayout>

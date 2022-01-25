@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myhome.Constants;
 import com.example.myhome.R;
 
 public class RoomActivity extends AppCompatActivity {
@@ -22,9 +23,9 @@ public class RoomActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        name.setText(intent.getStringExtra("roomname"));
+        name.setText(intent.getStringExtra(Constants.ROOMNAME));
 
-        int roomImageId= intent.getIntExtra("roomimage", 1);
+        int roomImageId= intent.getIntExtra(Constants.ROOMIMAGE, 1);
 
         if (roomImageId == 0 ){
             image.setImageResource(R.drawable.kitchen);

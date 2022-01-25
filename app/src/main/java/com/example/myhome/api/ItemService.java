@@ -24,7 +24,7 @@ public class ItemService {
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/item/get-item",
+                Constants.BASE_URL+ "item/get-item",
                 data,
                 response -> {
                     try {
@@ -41,7 +41,6 @@ public class ItemService {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
-                Log.d(Constants.TAG, "using email: " + email + " and  token : " + token);
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.TOKEN, token);
 

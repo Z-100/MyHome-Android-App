@@ -46,7 +46,7 @@ public class OverviewActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogbuilder;
     private ListView listView;
     private String[] roomNames;
-    private int[] roomImages;
+    private int[] roomImages = {};
     private int roomImage;
 
     public OverviewActivity() throws JSONException {
@@ -71,7 +71,7 @@ public class OverviewActivity extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
         TextView mTextView = (TextView) findViewById(R.id.txt_name_overview);
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         mTextView.setText(sp.getString("loggedAccount", ""));
 
 
@@ -108,9 +108,9 @@ public class OverviewActivity extends AppCompatActivity {
 
 
     public void openMembersActivityAndGetMembers(){
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-        String email = sp.getString("email", "");
-        String token = sp.getString("token", "");
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
+        String email = sp.getString(Constants.EMAIL, "");
+        String token = sp.getString(Constants.TOKEN, "");
         try {
             accountService.getMembers(getApplicationContext(), email, token, result -> {
                 parseMemberNamesAndImages(result);
@@ -123,12 +123,12 @@ public class OverviewActivity extends AppCompatActivity {
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
-            this.accountNames.put(member.getString("name"));
+            this.accountNames.put(member.getString(Constants.NAME));
         }
     }
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
-        intent.putExtra("Members", members);
+        intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
 
@@ -143,8 +143,8 @@ public class OverviewActivity extends AppCompatActivity {
     }
 
     public void deleteAccount() throws JSONException {
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-        accountService.removeMember(OverviewActivity.this, sp.getString("email", ""), sp.getString("token", ""), String.valueOf(currentMemberId), result -> {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
+        accountService.removeMember(OverviewActivity.this, sp.getString(Constants.EMAIL, ""), sp.getString(Constants.TOKEN, ""), String.valueOf(currentMemberId), result -> {
             openMembersActivityAndGetMembers();
         });
     }
@@ -152,7 +152,7 @@ public class OverviewActivity extends AppCompatActivity {
 
 
     public void createNewMemberDialog(Context context){
-        SharedPreferences sp = context.getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         dialogbuilder = new AlertDialog.Builder(this);
         final View editMemberView = getLayoutInflater().inflate(R.layout.edit_member, null);
         newMemberName = (EditText) editMemberView.findViewById(R.id.et_newMemberPopup_Name);
@@ -218,7 +218,18 @@ public class OverviewActivity extends AppCompatActivity {
             ImageView imageView = view1.findViewById(R.id.roomimages);
 
             name.setText(roomNames[i]);
-            imageView.setImageResource(roomImages[i]);
+            if (roomImages[i] == 0 ){
+                imageView.setImageResource(R.drawable.kitchen);
+            } else if (roomImages[i] == 1) {
+                imageView.setImageResource(R.drawable.bedroom);
+            }else if (roomImages[i] == 2) {
+                imageView.setImageResource(R.drawable.living);
+            }else if (roomImages[i] == 3) {
+                imageView.setImageResource(R.drawable.bathroom);
+            }
+            else if (roomImages[i] == 5) {
+                imageView.setImageResource(R.drawable.garage);
+            }
             return view1;
         }
     }

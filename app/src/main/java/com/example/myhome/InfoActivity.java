@@ -16,7 +16,7 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         backButton = findViewById(R.id.btn_backButton_info);
-        String[] accountName = getIntent().getStringArrayExtra("Members");
+        String[] accountName = getIntent().getStringArrayExtra(Constants.MEMBER);
 
         backButton.setOnClickListener(view -> {
             returnToOverview(accountName);
@@ -25,7 +25,7 @@ public class InfoActivity extends AppCompatActivity {
 
     public void returnToOverview(String[] accountName){
         Intent intent = new Intent(this, MembersActivity.class);
-        intent.putExtra("Members",accountName);
+        intent.putExtra(Constants.MEMBER,accountName);
         startActivity(intent);
     }
 }

@@ -21,9 +21,9 @@ public class KitchenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen);
-        sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        sp = getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         try {
-            kitchenService.getRecipe(KitchenActivity.this,   sp.getString("email", ""),   sp.getString("token", ""), result -> {
+            kitchenService.getRecipe(KitchenActivity.this,   sp.getString(Constants.EMAIL, Constants.EMPTYSTRING),   sp.getString(Constants.TOKEN, Constants.EMPTYSTRING), result -> {
                 Log.d(Constants.TAG, result.toString());
             });
         } catch (JSONException e) {

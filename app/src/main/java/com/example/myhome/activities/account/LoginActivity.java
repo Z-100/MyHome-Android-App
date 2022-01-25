@@ -44,10 +44,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_forgotPassword =    findViewById(R.id.btn_forgot_password_login);
         et_email           =    findViewById(R.id.et_username_login);
         et_password        =    findViewById(R.id.et_password_login);
-        sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        sp = getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
 
 
-        if (!sp.getString("token", "").equals("")){
+        if (!sp.getString(Constants.TOKEN, Constants.EMPTYSTRING).equals(Constants.EMPTYSTRING)){
             getMembersFromApi();
         }
 
@@ -68,28 +68,25 @@ public class LoginActivity extends AppCompatActivity {
 
     public void getAndSaveToken(String email, String password){
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("email", email);
-        editor.putString("password", password);
+        editor.putString(Constants.EMAIL, email);
+        editor.putString(Constants.PASSWORD, password);
         editor.commit();
         try {
             accountService.getLoginToken(getApplicationContext(),email, password, result ->{
-                Log.d(Constants.TAG, "String result for token " +   result.getString("token"));
-                editor.putString("token", result.getString("token"));
+                editor.putString(Constants.TOKEN, result.getString(Constants.TOKEN));
                 editor.commit();
-                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                 getMembersFromApi();
             });
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(LoginActivity.this, "Failed to log in", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, Constants.LOGINFAILEDERROR, Toast.LENGTH_LONG).show();
         }
     }
 
     public void getMembersFromApi(){
-        Log.d(Constants.TAG, "Trying to log in automatically");
-        SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-        String email = sp.getString("email", "");
-        String token = sp.getString("token", "");
+        SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
+        String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
+        String token = sp.getString(Constants.TOKEN, Constants.EMPTYSTRING);
         try {
             accountService.getMembers(getApplicationContext(), email, token, result -> {
                 parseMemberNamesAndImages(result);
@@ -97,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(LoginActivity.this, "Failed to get Members", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, Constants.MEMBERFAILEDERROR, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -107,13 +104,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
-        intent.putExtra("Members", members);
+        intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
-            this.accountNames.put(member.getString("name"));
+            this.accountNames.put(member.getString(Constants.NAME));
         }
     }
 

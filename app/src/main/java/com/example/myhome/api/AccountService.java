@@ -22,14 +22,10 @@ import java.util.Map;
 
 public class AccountService {
 
-    public static final Map<String, String> header = new HashMap<>();
+    private static final Map<String, String> header = new HashMap<>();
 
     public interface apiObjectSuccessHandler {
         void handle(JSONObject result) throws JSONException;
-    }
-
-    public interface apiStringSuccessHandler {
-        void handle(String result) throws JSONException;
     }
 
     public interface apiArraySuccessHandler {
@@ -43,7 +39,7 @@ public class AccountService {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/account/login",
+                Constants.BASE_URL+ "account/login",
                 data,
                 response -> {
                     Log.d(Constants.TAG, response.toString());
@@ -75,7 +71,7 @@ public class AccountService {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/account/register",
+                Constants.BASE_URL+ "account/register",
                 data,
                 response -> {
                     Log.d(Constants.TAG,response.toString());
@@ -109,7 +105,7 @@ public class AccountService {
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/member/get-member",
+                Constants.BASE_URL+ "member/get-member",
                 data,
                 response -> {
                     try {
@@ -125,7 +121,6 @@ public class AccountService {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
-                Log.d(Constants.TAG, "using email: " + email + " and  token : " + token);
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.TOKEN, token);
 
@@ -142,7 +137,7 @@ public class AccountService {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/member/delete-member",
+                Constants.BASE_URL+ "member/delete-member",
                 data,
                 response -> {
                     try {
@@ -174,7 +169,7 @@ public class AccountService {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/member/insert-member",
+                Constants.BASE_URL+ "member/insert-member",
                 data,
                 response -> {
                     try {
@@ -207,7 +202,7 @@ public class AccountService {
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/member/update-member",
+                Constants.BASE_URL+ "member/update-member",
                 data,
                 response -> {
                     try {

@@ -26,7 +26,7 @@ public class KitchenService {
 
         JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
-                "http://192.168.8.91:8080/recipe/get-recipes",
+                Constants.BASE_URL+ "recipe/get-recipes",
                 data,
                 response -> {
                     try {
@@ -43,8 +43,6 @@ public class KitchenService {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<String, String>();
-
-                Log.d(Constants.TAG, "using email: " + email + " and  token : " + token);
                 params.put("get-rating", "1");
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.TOKEN, token);
