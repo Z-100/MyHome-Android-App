@@ -35,7 +35,7 @@ public class ItemService {
                 },
                 error -> {
                     Log.d(Constants.TAG, error.toString());
-                    Toast.makeText(context, "Failed to get Members", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.FAILEDGETITEMS, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override

@@ -50,7 +50,7 @@ public class AccountService {
                     }
                 },
                 error -> {
-                    Toast.makeText(context, "Invalid Credentials" + error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.INVALIDCREDENTIALSERROR + error, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -58,7 +58,7 @@ public class AccountService {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.PASSWORD, password);
-                params.put(Constants.TOKEN, "MAHANSH MUTEM blyat suk my dik");
+                params.put(Constants.TOKEN, Constants.REGISTERTOKEN);
                 return params;
             }
         };
@@ -82,7 +82,7 @@ public class AccountService {
                     }
                 },
                 error -> {
-                    Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.REGISTERERROR, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -90,9 +90,9 @@ public class AccountService {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.PASSWORD, password);
-                params.put("newHouseName", "Home");
-                params.put("defaultMemberName", defaultMemberName);
-                params.put(Constants.TOKEN, "ma-ta este super dracu, blyat");
+                params.put(Constants.NEWHOUSENAME, Constants.DEFAULTHOMENAME);
+                params.put(Constants.DEFAULTMEMBERNAME, defaultMemberName);
+                params.put(Constants.TOKEN, Constants.LOGINTOKEN);
                 return params;
             }
         };
@@ -115,7 +115,7 @@ public class AccountService {
                     }
                 },
                 error -> {
-                    Log.d(Constants.TAG, error.toString());
+                    Toast.makeText(context, Constants.MEMBERFAILEDERROR, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -148,7 +148,7 @@ public class AccountService {
                 },
                 error -> {
                     Log.d(Constants.TAG, error.toString());
-                    Toast.makeText(context, "Failed to delete Member", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.FAILEDMEMBEDELETION, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -180,7 +180,7 @@ public class AccountService {
                 },
                 error -> {
                     Log.d(Constants.TAG, error.toString());
-                    Toast.makeText(context, "Failed to insert Member", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.FAILEDMEMBERCREATION, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -188,7 +188,7 @@ public class AccountService {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(Constants.EMAIL, email);
                 params.put(Constants.TOKEN, token);
-                params.put(Constants.ICON, "3");
+                params.put(Constants.ICON, Constants.STANDARDICON);
                 params.put(Constants.NAME, name);
                 return params;
             }
@@ -213,7 +213,7 @@ public class AccountService {
                 },
                 error -> {
                     Log.d(Constants.TAG, error.toString());
-                    Toast.makeText(context, "Failed to update Member", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.FAILEDMEMBERUPDATE, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override

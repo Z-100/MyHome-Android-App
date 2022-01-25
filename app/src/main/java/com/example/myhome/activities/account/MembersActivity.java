@@ -32,23 +32,11 @@ import java.util.Arrays;
 public class MembersActivity extends AppCompatActivity {
 
 
-    private AlertDialog.Builder dialogbuilder;
     private AlertDialog dialog;
     private EditText newMemberName;
-    private ImageButton btn_infoButton;
-    private Button newMemberSaveButton, newMemberCancelButton;
-
-
-
     private JSONArray accountNames = new JSONArray();
-
-
     private JSONArray roomIconsAsJson = new JSONArray();
     private JSONArray roomNamesAsJson = new JSONArray();
-
-
-    private Button btn_logout, btn_newmemeber;
-    private ActivityMainBinding binding;
     private AccountService ac = new AccountService();
     private int[] accountImages = {R.drawable.avataaar1, R.drawable.avataaar2, R.drawable.avataaar3, R.drawable.avataaar4, R.drawable.avataaar5, R.drawable.avataaar6, R.drawable.avataaar7, R.drawable.avataaar8, R.drawable.avataaar9 ,R.drawable.avataaar10};
     private int currentId;
@@ -57,7 +45,7 @@ public class MembersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        com.example.myhome.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         try {
             parseRoomsToStringArray();
@@ -70,9 +58,9 @@ public class MembersActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        btn_logout           = findViewById(R.id.btn_logout_members);
-        btn_newmemeber       = findViewById(R.id.btn_newmember_members);
-        btn_infoButton       = findViewById(R.id.btn_infoButton_members);
+        Button btn_logout = findViewById(R.id.btn_logout_members);
+        Button btn_newmemeber = findViewById(R.id.btn_newmember_members);
+        ImageButton btn_infoButton = findViewById(R.id.btn_infoButton_members);
         accountName = getIntent().getStringArrayExtra(Constants.MEMBER);
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
 
@@ -132,19 +120,19 @@ public class MembersActivity extends AppCompatActivity {
         editor.putString(Constants.LOGGEDACCOUNT, accountName);
         editor.commit();
         Intent intent = new Intent(this, OverviewActivity.class);
-        intent.putExtra("currentMemberId", id);
-        intent.putExtra("roomNames", roomnames);
-        intent.putExtra("roomIcons", roomicons);
+        intent.putExtra(Constants.CURRENTMEMBERID, id);
+        intent.putExtra(Constants.ROOMNAMES, roomnames);
+        intent.putExtra(Constants.ROOMICONS, roomicons);
         startActivity(intent);
     }
 
     public void createNewMemberDialog(Context context){
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
-        dialogbuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
         final View memberPopupView = getLayoutInflater().inflate(R.layout.popup, null);
         newMemberName = (EditText) memberPopupView.findViewById(R.id.et_newMemberPopup_Name);
-        newMemberSaveButton = (Button) memberPopupView.findViewById(R.id.btn_saveButton_newMember);
-        newMemberCancelButton = (Button) memberPopupView.findViewById(R.id.btn_cancelButton_newMember);
+        Button newMemberSaveButton = (Button) memberPopupView.findViewById(R.id.btn_saveButton_newMember);
+        Button newMemberCancelButton = (Button) memberPopupView.findViewById(R.id.btn_cancelButton_newMember);
 
 
         dialogbuilder.setView(memberPopupView);

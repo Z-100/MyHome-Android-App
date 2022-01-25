@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    private Button btn_logIn, btn_confirm;
     private EditText et_username, et_password, et_email;
     private AccountService accountService = new AccountService();
     private JSONArray accountNames = new JSONArray();
@@ -31,8 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        btn_logIn   = findViewById(R.id.btn_login_register);
-        btn_confirm = findViewById(R.id.btn_confirm_register);
+        Button btn_logIn = findViewById(R.id.btn_login_register);
+        Button btn_confirm = findViewById(R.id.btn_confirm_register);
         et_username = findViewById(R.id.et_username_register);
         et_password = findViewById(R.id.et_password_register);
         et_email    = findViewById(R.id.et_email_register);

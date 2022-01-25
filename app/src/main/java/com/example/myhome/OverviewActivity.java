@@ -35,16 +35,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class OverviewActivity extends AppCompatActivity {
-    private ImageButton btn_openMembers, btn_openItems, btn_deleteMember, btn_editMember;
     private AccountService accountService = new AccountService();
     private JSONArray accountNames = new JSONArray();
     private AlertDialog dialog;
     private int currentMemberId;
     private EditText newMemberName;
-    private ActivityMainBinding binding;
-    private Button editedMemberSaveButton, editedMemberCancelButton, btn_openKitchen;
-    private AlertDialog.Builder dialogbuilder;
-    private ListView listView;
     private String[] roomNames;
     private int[] roomImages = {};
     private int roomImage;
@@ -55,32 +50,32 @@ public class OverviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        roomNames = getIntent().getStringArrayExtra("roomNames");
-        roomImages = getIntent().getIntArrayExtra("roomIcons");
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        roomNames = getIntent().getStringArrayExtra(Constants.ROOMNAMES);
+        roomImages = getIntent().getIntArrayExtra(Constants.ROOMICONS);
+        com.example.myhome.databinding.ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setContentView(R.layout.activity_overview);
-        currentMemberId =  getIntent().getIntExtra("currentMemberId", 0);
-        btn_openMembers     =    findViewById(R.id.btn_openMembers_overview);
-        btn_openItems       =    findViewById(R.id.btn_openItems_overview);
-        btn_openKitchen     =    findViewById(R.id.btn_openKitchenActivity_overview);
-        btn_deleteMember    =    findViewById(R.id.btn_deleteAccount_overview);
-        btn_editMember      =    findViewById(R.id.btn_editMember_overview);
-        listView            =    findViewById(R.id.rooms_listview);
+        currentMemberId =  getIntent().getIntExtra(Constants.CURRENTMEMBERID, 0);
+        ImageButton btn_openMembers = findViewById(R.id.btn_openMembers_overview);
+        ImageButton btn_openItems = findViewById(R.id.btn_openItems_overview);
+        Button btn_openKitchen = findViewById(R.id.btn_openKitchenActivity_overview);
+        ImageButton btn_deleteMember = findViewById(R.id.btn_deleteAccount_overview);
+        ImageButton btn_editMember = findViewById(R.id.btn_editMember_overview);
+        ListView listView = findViewById(R.id.rooms_listview);
 
         CustomAdapter customAdapter = new CustomAdapter();
         listView.setAdapter(customAdapter);
         TextView mTextView = (TextView) findViewById(R.id.txt_name_overview);
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
-        mTextView.setText(sp.getString("loggedAccount", ""));
+        mTextView.setText(sp.getString(Constants.LOGGEDACCOUNT, Constants.EMPTYSTRING));
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
-                intent.putExtra("roomname", roomNames[i]);
-                intent.putExtra("roomimage", roomImage);
+                intent.putExtra(Constants.ROOMNAME, roomNames[i]);
+                intent.putExtra(Constants.ROOMIMAGE, roomImages[i]);
                 startActivity(intent);
             }
         });
@@ -109,8 +104,8 @@ public class OverviewActivity extends AppCompatActivity {
 
     public void openMembersActivityAndGetMembers(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
-        String email = sp.getString(Constants.EMAIL, "");
-        String token = sp.getString(Constants.TOKEN, "");
+        String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
+        String token = sp.getString(Constants.TOKEN, Constants.EMPTYSTRING);
         try {
             accountService.getMembers(getApplicationContext(), email, token, result -> {
                 parseMemberNamesAndImages(result);
@@ -144,7 +139,7 @@ public class OverviewActivity extends AppCompatActivity {
 
     public void deleteAccount() throws JSONException {
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
-        accountService.removeMember(OverviewActivity.this, sp.getString(Constants.EMAIL, ""), sp.getString(Constants.TOKEN, ""), String.valueOf(currentMemberId), result -> {
+        accountService.removeMember(OverviewActivity.this, sp.getString(Constants.EMAIL, Constants.EMPTYSTRING), sp.getString(Constants.TOKEN, Constants.EMPTYSTRING), String.valueOf(currentMemberId), result -> {
             openMembersActivityAndGetMembers();
         });
     }
@@ -153,11 +148,11 @@ public class OverviewActivity extends AppCompatActivity {
 
     public void createNewMemberDialog(Context context){
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
-        dialogbuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
         final View editMemberView = getLayoutInflater().inflate(R.layout.edit_member, null);
         newMemberName = (EditText) editMemberView.findViewById(R.id.et_newMemberPopup_Name);
-        editedMemberSaveButton = (Button) editMemberView.findViewById(R.id.btn_saveButton_editMember);
-        editedMemberCancelButton = (Button) editMemberView.findViewById(R.id.btn_cancelButton_editMember);
+        Button editedMemberSaveButton = (Button) editMemberView.findViewById(R.id.btn_saveButton_editMember);
+        Button editedMemberCancelButton = (Button) editMemberView.findViewById(R.id.btn_cancelButton_editMember);
 
 
         dialogbuilder.setView(editMemberView);
@@ -168,13 +163,14 @@ public class OverviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 try {
-                    accountService.updateMember(OverviewActivity.this, sp.getString("email", ""), sp.getString("token", ""), String.valueOf(currentMemberId), "3", newMemberName.getText().toString(), result -> {
-                        Toast.makeText(OverviewActivity.this, "Successfully updated", Toast.LENGTH_LONG).show();
+                    accountService.updateMember(OverviewActivity.this, sp.getString(Constants.EMAIL, Constants.EMPTYSTRING), sp.getString(Constants.TOKEN, Constants.EMPTYSTRING), String.valueOf(currentMemberId), Constants.STANDARDICON, newMemberName.getText().toString(), result -> {
+                        Toast.makeText(OverviewActivity.this, Constants.SUCCESSFULMEMBERUPDATE, Toast.LENGTH_LONG).show();
                         dialog.dismiss();
                         resetActivity(OverviewActivity.this, newMemberName.getText().toString());
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(OverviewActivity.this, Constants.FAILEDMEMBERUPDATE, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -186,12 +182,12 @@ public class OverviewActivity extends AppCompatActivity {
         });
     }
     public void resetActivity(Context context, String name){
-        SharedPreferences sp = context.getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("loggedAccount", name);
+        editor.putString( Constants.LOGGEDACCOUNT, name);
         editor.commit();
         Intent intent = new Intent(this, OverviewActivity.class);
-        intent.putExtra("currentMemberId", currentMemberId);
+        intent.putExtra(Constants.CURRENTMEMBERID, currentMemberId);
         startActivity(intent);
     }
 

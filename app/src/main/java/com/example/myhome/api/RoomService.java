@@ -36,7 +36,7 @@ public class RoomService {
                 },
                 error -> {
                     Log.d(Constants.TAG, error.toString());
-                    Toast.makeText(context, "Failed to get Members", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, Constants.FAILEDGETROOMS, Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
