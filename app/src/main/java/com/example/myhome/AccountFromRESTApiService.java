@@ -2,6 +2,8 @@ package com.example.myhome;
 
 import android.os.AsyncTask;
 
+import com.example.myhome.models.Account;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -30,7 +32,9 @@ public class AccountFromRESTApiService extends AsyncTask<String, Void, ResponseE
 
         HttpHeaders headers = new HttpHeaders();
 
-        headers.set("token", "s"); //TODO: Change to something secure or something like that
+        headers.set("email","troll" );
+        headers.set("password","troll" );
+        headers.set("token", "69"); //TODO: Change to something secure or something like that
 
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
 
