@@ -12,11 +12,12 @@
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.30625" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/drawable/ic_launcher_background.xml" value="0.30625" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_fridge.xml" value="0.2520833333333333" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_info.xml" value="0.34692028985507245" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_items.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_kitchen.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_legal_info.xml" value="0.2520833333333333" />
-        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_login.xml" value="0.2520833333333333" />
-        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_main.xml" value="0.2674772036474164" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_meals.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_members.xml" value="0.25280898876404495" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_over_view.xml" value="0.36277173913043476" />
@@ -27,9 +28,12 @@
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_rooms.xml" value="0.2753623188405797" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_settings.xml" value="0.2674772036474164" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/activity_shopping_lists.xml" value="0.41875" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/delete_member_popup.xml" value="0.3848958333333333" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/edit_member.xml" value="0.2672239108409321" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/grid_item.xml" value="0.35989583333333336" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/member_grid_item.xml" value="0.35989583333333336" />
         <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/popup.xml" value="0.33" />
+        <entry key="..\:/Users/andre/StudioProjects/Working/app/src/main/res/layout/room_data.xml" value="0.3848958333333333" />
       </map>
     </option>
   </component>

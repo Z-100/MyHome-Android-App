@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.kitchen.RecipesActivity">
+    tools:context=".activities.kitchen.RecipesActivity"
+    android:orientation="vertical">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

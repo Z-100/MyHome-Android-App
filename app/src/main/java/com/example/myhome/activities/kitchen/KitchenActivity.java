@@ -14,8 +14,8 @@ import com.example.myhome.api.KitchenService;
 import org.json.JSONException;
 
 public class KitchenActivity extends AppCompatActivity {
-    SharedPreferences sp;
-    KitchenService kitchenService = new KitchenService();
+    private SharedPreferences sp;
+    private KitchenService kitchenService = new KitchenService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

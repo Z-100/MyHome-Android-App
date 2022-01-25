@@ -18,7 +18,6 @@ import java.util.Map;
 
 public class ItemService {
 
-    //todo get items
     public void getItems(Context context, String email, String token, AccountService.apiArraySuccessHandler callback) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONArray data = new JSONArray();

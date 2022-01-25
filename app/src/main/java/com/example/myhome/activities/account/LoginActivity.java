@@ -26,12 +26,12 @@ import java.util.ArrayList;
 
 
 public class LoginActivity extends AppCompatActivity {
-    FloatingActionButton btn_signIn;
-    Button btn_signUp, btn_forgotPassword;
-    EditText et_email, et_password;
-    SharedPreferences sp;
-    AccountService accountService = new AccountService();
-    JSONArray accountNames = new JSONArray();
+    private FloatingActionButton btn_signIn;
+    private Button btn_signUp, btn_forgotPassword;
+    private EditText et_email, et_password;
+    private SharedPreferences sp;
+    private AccountService accountService = new AccountService();
+    private JSONArray accountNames = new JSONArray();
 
 
     @Override
@@ -45,12 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         et_email           =    findViewById(R.id.et_username_login);
         et_password        =    findViewById(R.id.et_password_login);
         sp = getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
-
-        //TODO remove this stuff when login works again
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token", "sananas");
-        editor.commit();
-        //till here
 
 
         if (!sp.getString("token", "").equals("")){
@@ -92,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void getMembersFromApi(){
+        Log.d(Constants.TAG, "Trying to log in automatically");
         SharedPreferences sp = getApplicationContext().getSharedPreferences("MyUserPrefs", Context.MODE_PRIVATE);
         String email = sp.getString("email", "");
         String token = sp.getString("token", "");

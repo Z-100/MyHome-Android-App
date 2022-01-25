@@ -136,11 +136,11 @@ public class AccountService {
     }
 
 
-    public void removeMember(Context context, String email, String token, String memberid, apiArraySuccessHandler callback) throws JSONException {
+    public void removeMember(Context context, String email, String token, String memberid, apiObjectSuccessHandler callback) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
-        JSONArray data = new JSONArray();
+        JSONObject data = new JSONObject();
 
-        JsonArrayRequest request = new JsonArrayRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 "http://192.168.8.91:8080/member/delete-member",
                 data,
@@ -201,11 +201,11 @@ public class AccountService {
         queue.add(request);
     }
 
-    public void updateMember(Context context, String email, String token, String member_id, String replacement_icon, String replacement_name, apiArraySuccessHandler callback) throws JSONException {
+    public void updateMember(Context context, String email, String token, String member_id, String replacement_icon, String replacement_name, apiObjectSuccessHandler callback) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
-        JSONArray data = new JSONArray();
+        JSONObject data = new JSONObject();
 
-        JsonArrayRequest request = new JsonArrayRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 "http://192.168.8.91:8080/member/update-member",
                 data,
