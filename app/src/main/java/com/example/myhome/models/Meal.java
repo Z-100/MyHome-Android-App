@@ -5,6 +5,10 @@ import java.sql.Date;
 
 import lombok.Data;
 
+/**
+ * @author Rad14nt
+ * Class used to create a model for Meal, and add all the necessary methods to it * */
+
 @Data
 public class Meal {
 
@@ -17,7 +21,10 @@ public class Meal {
     @PropertyName("fk_memberId")
     private int fk_memberId;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public int getId() {
         return id;
     }

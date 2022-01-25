@@ -7,6 +7,10 @@ import java.sql.Date;
 import lombok.Data;
 
 
+/**
+ * @author Rad14nt
+ * Class used to create a model for Cleaning, and add all the necessary methods to it * */
+
 @Data
 public class Cleaning {
 
@@ -15,7 +19,10 @@ public class Cleaning {
     @PropertyName("cleaning_date")
     private Date cleaning_date;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public int getId() {
         return id;
     }

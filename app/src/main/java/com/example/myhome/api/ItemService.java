@@ -16,8 +16,20 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ItemService {
+/**
+ * @author Rad14nt
+ * Class used to hold the services that call to the item endpoint of the API
+ * */
 
+public class ItemService {
+    /**
+     * Method to get items from api
+     * @param context context of current app
+     * @param email email of the logged in user
+     * @param token token of the logged in user
+     * @param callback successhandler
+     * @throws JSONException
+     */
     public void getItems(Context context, String email, String token, AccountService.apiArraySuccessHandler callback) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONArray data = new JSONArray();

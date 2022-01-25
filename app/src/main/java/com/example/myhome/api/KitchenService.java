@@ -17,8 +17,20 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class KitchenService {
+/**
+ * @author Rad14nt
+ * Class used to hold the services that call to the kitchen endpoint of the API
+ * */
 
+public class KitchenService {
+    /**
+     * Method to get recipes from api
+     * @param context context of current app
+     * @param email email of the logged in user
+     * @param token token of the logged in user
+     * @param callback successhandler
+     * @throws JSONException JsonExceptionThrower
+     */
     public void getRecipe(Context context,String email, String token, AccountService.apiArraySuccessHandler callback) throws JSONException {
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONArray data = new JSONArray();

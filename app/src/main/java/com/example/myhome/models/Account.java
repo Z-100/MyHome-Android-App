@@ -3,6 +3,10 @@ package com.example.myhome.models;
 import com.google.firebase.database.PropertyName;
 import lombok.Data;
 
+/**
+ * @author Rad14nt
+ * Class used to create a model for Account, and add all the necessary methods to it * */
+
 @Data
 public class Account {
 
@@ -13,7 +17,10 @@ public class Account {
     @PropertyName("pw")
     private String pw;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public Long getId() {
         return id;
     }

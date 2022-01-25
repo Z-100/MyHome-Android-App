@@ -34,6 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author Rad14nt
+ * Class used to Display Overview Page and get/use the necessary data
+ * */
+
 public class OverviewActivity extends AppCompatActivity {
     private AccountService accountService = new AccountService();
     private JSONArray accountNames = new JSONArray();
@@ -42,11 +47,13 @@ public class OverviewActivity extends AppCompatActivity {
     private EditText newMemberName;
     private String[] roomNames;
     private int[] roomImages = {};
-    private int roomImage;
 
-    public OverviewActivity() throws JSONException {
-    }
 
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +78,13 @@ public class OverviewActivity extends AppCompatActivity {
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * clickListener, enables clicking on a room to continue to a room page where more details are to be shown
+             * @param adapterView adapterview needed to generate the onItemClick method
+             * @param view the current view we are on
+             * @param i  position of item that was clicked
+             * @param l  position required by onItemClick
+             */
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), RoomActivity.class);
@@ -101,7 +115,9 @@ public class OverviewActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Method used to open Members activity and get the members activity the data it requires
+     */
     public void openMembersActivityAndGetMembers(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
@@ -115,28 +131,49 @@ public class OverviewActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method used to parse Members from their original object
+     * @param members
+     * @throws JSONException
+     */
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
             this.accountNames.put(member.getString(Constants.NAME));
         }
     }
+
+    /**
+     * Method used to open Members Activity
+     * @param members
+     */
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
         intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
 
+    /**
+     * Method to open Items Activity
+     */
     public void openItemsActivity(){
         Intent intent = new Intent(this, ItemsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method used to open kitchen Activity
+     */
     public void openKitchenActivity(){
         Intent intent = new Intent(this, KitchenActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method used to delete account an account, calls to open Member Activity after
+     * @throws JSONException throws a JSON Exception
+     */
     public void deleteAccount() throws JSONException {
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         accountService.removeMember(OverviewActivity.this, sp.getString(Constants.EMAIL, Constants.EMPTYSTRING), sp.getString(Constants.TOKEN, Constants.EMPTYSTRING), String.valueOf(currentMemberId), result -> {
@@ -144,8 +181,10 @@ public class OverviewActivity extends AppCompatActivity {
         });
     }
 
-
-
+    /**
+     * Method used to create a popup to create a new Member
+     * @param context
+     */
     public void createNewMemberDialog(Context context){
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
@@ -161,12 +200,15 @@ public class OverviewActivity extends AppCompatActivity {
 
         editedMemberSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /** Method used to save the edit data on user edit
+             * @param v
+             */
             public void onClick(View v){
                 try {
                     accountService.updateMember(OverviewActivity.this, sp.getString(Constants.EMAIL, Constants.EMPTYSTRING), sp.getString(Constants.TOKEN, Constants.EMPTYSTRING), String.valueOf(currentMemberId), Constants.STANDARDICON, newMemberName.getText().toString(), result -> {
                         Toast.makeText(OverviewActivity.this, Constants.SUCCESSFULMEMBERUPDATE, Toast.LENGTH_LONG).show();
                         dialog.dismiss();
-                        resetActivity(OverviewActivity.this, newMemberName.getText().toString());
+                        openOverviewActivity(OverviewActivity.this, newMemberName.getText().toString(), roomNames, roomImages, currentMemberId);
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -176,21 +218,39 @@ public class OverviewActivity extends AppCompatActivity {
         });
         editedMemberCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            /** Method used to dismiss the popup
+             * @param v
+             */
             public void onClick(View v){
                 dialog.dismiss();
             }
         });
     }
-    public void resetActivity(Context context, String name){
+
+    /**
+     * Method used to open OverviewActivity and give it all the data it needs to generate its items
+     * @param context the current Activity Context
+     * @param name the name of the user we clicked on
+     * @param roomnames the names of the rooms that are connected to the account
+     * @param roomicons the list of icons that belong to the rooms
+     * @param id the id of the current member that was clicked
+     */
+    public void openOverviewActivity(Context context, String name,String[] roomnames, int[]roomicons, int id) {
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString( Constants.LOGGEDACCOUNT, name);
+        editor.putString(Constants.LOGGEDACCOUNT, name);
         editor.commit();
         Intent intent = new Intent(this, OverviewActivity.class);
-        intent.putExtra(Constants.CURRENTMEMBERID, currentMemberId);
+        intent.putExtra(Constants.CURRENTMEMBERID, id);
+        intent.putExtra(Constants.ROOMNAMES, roomnames);
+        intent.putExtra(Constants.ROOMICONS, roomicons);
         startActivity(intent);
     }
 
+    /**
+     * @author Rad14nt
+     * Class with methods used to generate the Member buttons for the different members
+     */
     private class CustomAdapter extends BaseAdapter {
         @Override
         public int getCount() {

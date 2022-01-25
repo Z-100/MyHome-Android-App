@@ -27,7 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
+/**
+ * @author Rad14nt
+ * Class used to Display Members Page and get/use the given data
+ * */
+
 
 public class MembersActivity extends AppCompatActivity {
 
@@ -42,6 +46,11 @@ public class MembersActivity extends AppCompatActivity {
     private int currentId;
     private String[] accountName;
 
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +96,13 @@ public class MembersActivity extends AppCompatActivity {
 
         binding.gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            /**
+             *
+             * @param parent AdapterView to identify the grid we are on
+             * @param view view we are currently on
+             * @param position position of the clicked member
+             * @param id id of the clicked member
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Context context = MembersActivity.this;
@@ -109,11 +125,23 @@ public class MembersActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Method to open Login Activity
+     */
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method to open Overview activity and pass all the necessary data
+     * @param context current Activity context
+     * @param accountName name of the member that the user chose
+     * @param roomnames a list of rooms on the account
+     * @param roomicons a list of the icon ids for the rooms
+     * @param id id of the currently chosen member
+     */
     public void openOverviewActivity(Context context, String accountName,String[] roomnames, int[]roomicons, int id) {
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
@@ -126,6 +154,10 @@ public class MembersActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Method to create a new member popup
+     * @param context current activity context
+     */
     public void createNewMemberDialog(Context context){
         SharedPreferences sp = context.getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         AlertDialog.Builder dialogbuilder = new AlertDialog.Builder(this);
@@ -160,7 +192,9 @@ public class MembersActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Method to get All members bound to logged in account from api
+     */
     public void getMembersFromApi(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
@@ -175,6 +209,11 @@ public class MembersActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to parse the names of the members from the rest of their objects
+     * @param members Array of members with all their data
+     * @throws JSONException JsonException to be thrown in case of failure
+     */
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
@@ -182,18 +221,29 @@ public class MembersActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Method to open Members Activtity
+     * @param members List of members to be displayed on the page to be opened
+     */
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
         intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
+
+    /**
+     * open Information Activity to see legal info
+     */
     public void openInfoActivity() {
         Intent intent = new Intent(this, InfoActivity.class);
         intent.putExtra(Constants.MEMBER,accountName);
         startActivity(intent);
     }
 
+    /**
+     * Method to parse rooms into a String List so we can display it on our front end
+     * @throws JSONException Exception to
+     */
     public void parseRoomsToStringArray() throws JSONException {
         RoomService roomService = new RoomService();
 
@@ -206,6 +256,11 @@ public class MembersActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method to show save icons for rooms from api
+     * @return returns a list of the icon ids
+     * @throws JSONException Exception to be thrown
+     */
     public int[] getIconsFromApi() throws JSONException {
         RoomService roomService = new RoomService();
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
@@ -220,6 +275,11 @@ public class MembersActivity extends AppCompatActivity {
         return toIntArray(roomIconsAsJson);
     }
 
+    /**
+     * Method to change JsonArray into a String List that the front end can display
+     * @param array json array to be parsed into String list
+     * @return returns a List of Strings
+     */
     public static String[] toStringArray(JSONArray array) {
         if(array==null)
             return null;
@@ -231,6 +291,11 @@ public class MembersActivity extends AppCompatActivity {
         return arr;
     }
 
+    /**
+     * Method to change JsonArray into a int List that the front end can display
+     * @param array json array to be parsed into int list
+     * @return returns a List of ints
+     */
     public static int[] toIntArray(JSONArray array) {
         if(array==null)
             return null;

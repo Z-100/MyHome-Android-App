@@ -1,5 +1,10 @@
 package com.example.myhome;
 
+/**
+ * @author Rad14nt
+ * Class to hold all the constants in one place
+ * */
+
 public class Constants {
     public static final String EMAIL = "email";
     public static final String TAG = "api";

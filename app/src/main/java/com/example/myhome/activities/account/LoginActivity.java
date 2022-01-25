@@ -24,6 +24,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * @author Rad14nt
+ * Class used to Display Login Page and get/use the given login data
+ * */
 
 public class LoginActivity extends AppCompatActivity {
     private FloatingActionButton btn_signIn;
@@ -33,7 +37,11 @@ public class LoginActivity extends AppCompatActivity {
     private AccountService accountService = new AccountService();
     private JSONArray accountNames = new JSONArray();
 
-
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +73,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * A method to get the token in case user hasnt registered the first time on this device or has decided to log out
+     * @param email user email
+     * @param password user password
+     */
     public void getAndSaveToken(String email, String password){
         SharedPreferences.Editor editor = sp.edit();
         editor.putString(Constants.EMAIL, email);
@@ -83,6 +95,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to get Members from api and pass them onto membersactivity in case of successfull login
+     */
     public void getMembersFromApi(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
@@ -98,15 +113,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to openResetPassword Activity
+     */
     public void openResetPasswordActivity() {
 
     }
 
+    /**
+     * Method to open members activtiy
+     * @param members a list of members to be displyed so the user can chose who he is
+     */
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
         intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
+
+    /**
+     * Method to parse names from all the other member data
+     * @param members the array of members to be parsed
+     * @throws JSONException throws JsonException
+     */
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
@@ -114,11 +142,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to open Register Activity
+     */
     public void openRegisterActivity() {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method to turn an array into a list of strings
+     * @param array array to be turned
+     * @return
+     */
     public static String[] toStringArray(JSONArray array) {
         if(array==null)
             return null;

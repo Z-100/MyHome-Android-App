@@ -2,6 +2,11 @@ package com.example.myhome.models;
 import com.google.firebase.database.PropertyName;
 import lombok.Data;
 
+
+/**
+ * @author Rad14nt
+ * Class used to create a model for Member, and add all the necessary methods to it * */
+
 @Data
 public class Member {
 
@@ -14,7 +19,10 @@ public class Member {
     @PropertyName("fk_accountId")
     private int fk_accountId;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public int getId() {
         return id;
     }

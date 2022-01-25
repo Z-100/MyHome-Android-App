@@ -5,6 +5,11 @@ import java.sql.Date;
 
 import lombok.Data;
 
+/**
+ * @author Rad14nt
+ * Class used to create a model for Shopping List, and add all the necessary methods to it
+ * */
+
 @Data
 public class Shopping_List {
 
@@ -15,7 +20,10 @@ public class Shopping_List {
     @PropertyName("house_id")
     private int house_id;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public int getId() {
         return id;
     }

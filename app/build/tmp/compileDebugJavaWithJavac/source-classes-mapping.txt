@@ -1,6 +1,0 @@
-com/example/myhome/MainActivity.java
- com.example.myhome.MainActivity
-com/example/myhome/RegisterActivity.java
- com.example.myhome.RegisterActivity
-com/example/myhome/BuildConfig.java
- com.example.myhome.BuildConfig

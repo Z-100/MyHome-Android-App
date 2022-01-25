@@ -8,9 +8,20 @@ import android.widget.ImageButton;
 
 import com.example.myhome.activities.account.MembersActivity;
 
+/**
+ * @author Rad14nt
+ * Class used to Display Info Page and get/use the necessary data
+ * */
+
 public class InfoActivity extends AppCompatActivity {
     private ImageButton backButton;
 
+
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +34,10 @@ public class InfoActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Method used to return to Overview activity
+     * @param accountName account name given so overview knows what account to show
+     */
     public void returnToOverview(String[] accountName){
         Intent intent = new Intent(this, MembersActivity.class);
         intent.putExtra(Constants.MEMBER,accountName);

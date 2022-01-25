@@ -19,12 +19,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * @author Rad14nt
+ * Class used to Display Register Page and get/use the given data
+ * */
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_username, et_password, et_email;
     private AccountService accountService = new AccountService();
     private JSONArray accountNames = new JSONArray();
     private SharedPreferences sp;
 
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +55,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Method to create an account/ register
+     */
     public void createAccount(){
         try {
             accountService.register(getApplicationContext(),et_email.getText().toString(), et_password.getText().toString(), et_username.getText().toString(), result -> {
@@ -62,12 +76,17 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Method to open the login activity
+     */
     public void openLoginActivity() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Method to get Members from the account the user just created
+     */
     public void getMembersFromApi(){
         SharedPreferences sp = getApplicationContext().getSharedPreferences(Constants.SHAREDPREFNAME, Context.MODE_PRIVATE);
         String email = sp.getString(Constants.EMAIL, Constants.EMPTYSTRING);
@@ -83,11 +102,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to open the members Activity after registering
+     * @param members the list of members to be dispalyed on the member Activity
+     */
     public void openMembersActivity(String[] members) {
         Intent intent = new Intent(this, MembersActivity.class);
         intent.putExtra(Constants.MEMBER, members);
         startActivity(intent);
     }
+
+    /**
+     * Method parse Member name from the incoming jsonArray
+     * @param members tje array of members to be parsed
+     * @throws JSONException
+     */
     public void parseMemberNamesAndImages(JSONArray members) throws JSONException {
         for (int i = 0; i < members.length(); i++) {
             JSONObject member = members.getJSONObject(i);
@@ -95,6 +124,11 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to turn Array into String List to be able to display them on front end
+     * @param array array to be converted into String List
+     * @return List of Strings to display in the next activity
+     */
     public static String[] toStringArray(JSONArray array) {
         if(array==null)
             return null;

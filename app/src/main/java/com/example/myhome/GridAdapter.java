@@ -12,15 +12,25 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * @author Rad14nt
+ * Class used to Display a GridAdapter on Overview Activity and get/use the necessary data
+ * */
+
 public class GridAdapter extends BaseAdapter {
 
-    Context context;
-    int[] image;
-    String[] accountName;
-    LayoutInflater inflater;
+    private Context context;
+    private int[] image;
+    private String[] accountName;
+    private LayoutInflater inflater;
 
 
-
+    /**
+     * GridAdapter to model for an member picture thats to be shown in members activity
+     * @param context context of the site the GridAdapter was called on
+     * @param accountName name of the member to be displayed
+     * @param image image id, currently hardcoded
+     */
     public GridAdapter(Context context, String[] accountName, int[] image) {
         this.context = context;
         this.accountName = accountName;

@@ -2,6 +2,12 @@ package com.example.myhome.models;
 import com.google.firebase.database.PropertyName;
 import lombok.Data;
 
+
+/**
+ * @author Rad14nt
+ * Class used to create a model for Rating, and add all the necessary methods to it
+ * */
+
 @Data
 public class Rating {
 
@@ -14,7 +20,10 @@ public class Rating {
     @PropertyName("recipe_idRecipe")
     private int recipe_idRecipe;
 
-
+    /**
+     * getters and setters
+     * @return
+     */
     public int getId() {
         return id;
     }

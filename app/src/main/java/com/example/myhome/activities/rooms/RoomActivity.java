@@ -10,9 +10,18 @@ import android.widget.TextView;
 import com.example.myhome.Constants;
 import com.example.myhome.R;
 
+/**
+ * @author Rad14nt
+ * Class used to Display Room Page and get/use the given login data
+ * */
 public class RoomActivity extends AppCompatActivity {
     private TextView name;
     private ImageView image;
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

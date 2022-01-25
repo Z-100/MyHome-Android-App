@@ -12,11 +12,20 @@ import com.example.myhome.R;
 import com.example.myhome.api.KitchenService;
 
 import org.json.JSONException;
+/**
+ * @author Rad14nt
+ * Class used to Display Kitchen Page and get/use the given data
+ * */
 
 public class KitchenActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private KitchenService kitchenService = new KitchenService();
 
+    /**
+     * Method used to create and start the view
+     *
+     * @param savedInstanceState Standard bundle to start creation of the view
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
