@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".activities.account.RegisterActivity">
+    tools:context=".activities.account.RegisterActivity"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/t_register_title"

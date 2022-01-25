@@ -8,7 +8,8 @@
     android:backgroundTint="#FFFFFF"
     android:elevation="@dimen/cardview_compat_inset_shadow"
     android:scrollbars="horizontal"
-    tools:context=".activities.account.LoginActivity">
+    tools:context=".activities.account.LoginActivity"
+    android:orientation="vertical">
 
 
     <Button
@@ -118,7 +119,7 @@
             android:layout_marginBottom="31dp"
             android:background="@null"
             android:ems="10"
-            android:hint="@string/username"
+            android:hint="@string/email"
             android:inputType="textPersonName"
             android:textColor="@color/writing"
             android:textColorHighlight="#00FFFFFF"
